@@ -44,3 +44,11 @@ model Prescription {
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
 }
+
+model Doctor {
+  id                    String   @id @default(uuid())
+  registration_document String   @unique
+  specialty             String
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+}
