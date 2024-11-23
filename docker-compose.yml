@@ -6,7 +6,7 @@ services:
     build: .
     ports:
       - 3334:3334
-    env_file: '.env'
+    env_file: '.env.local'
     networks:
       - app-tier
     volumes:
@@ -20,7 +20,7 @@ services:
     restart: always
     ports:
       - 5432:5432
-    env_file: '.env'
+    env_file: '.env.local'
     networks:
       - app-tier
     volumes:
