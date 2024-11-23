@@ -8,7 +8,7 @@ import { jsonFormatter } from '../../../../helpers/jsonFormatter';
 
 interface IRquestBody {
   name: string,
-  cpf: number,
+  cpf: string,
   email: string,
   phone: number,
   password: string,
