@@ -4,7 +4,7 @@ import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
   name: string;
-  cpf: number;
+  cpf: string;
   email: string;
   phone: number;
   password: string;
