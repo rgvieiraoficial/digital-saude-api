@@ -1,4 +1,5 @@
 import { User, $Enums } from '@prisma/client';
+import { hash } from 'bcryptjs';
 
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
@@ -21,7 +22,9 @@ class CreateUserUseCase {
       throw new Error("Users already taken!");
     }*/
 
-    const newUser = await this.usersRepository.create({ name, cpf, email, phone, password, role });
+    const passwordHash = await hash(password, 8);
+
+    const newUser = await this.usersRepository.create({ name, cpf, email, phone, password: passwordHash, role });
 
     return newUser;
   }

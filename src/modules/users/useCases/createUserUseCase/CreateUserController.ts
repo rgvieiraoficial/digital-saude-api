@@ -22,11 +22,11 @@ class CreateUserController {
     const { name, cpf, email, phone, password, role } = request.body as IRquestBody;
 
     try {
-      const user = await this.createUserUseCase.execute({ name, cpf, email, phone, password, role });
+      const data = await this.createUserUseCase.execute({ name, cpf, email, phone, password, role });
 
-      return reply.status(201).send(jsonFormatter(user));
+      return reply.status(201).send(jsonFormatter(data));
     } catch (err) {
-      return reply.status(400).send({ error: "E-mail already taken!" });
+      return reply.status(400).send({ error: "Error!" });
     }
   }
 }
