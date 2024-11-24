@@ -2,6 +2,7 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 
 import { usersRoutes } from './users.routes';
 import { prescriptionsRoutes } from './prescriptions.routes';
+import { doctorsRoutes } from './doctors.routes';
 
 async function appRoutes(fastify: FastifyInstance) {
   fastify.get('/', (request: FastifyRequest, reply: FastifyReply) => {
@@ -10,6 +11,7 @@ async function appRoutes(fastify: FastifyInstance) {
 
   fastify.register(usersRoutes, { prefix: '/users' });
   fastify.register(prescriptionsRoutes, { prefix: '/prescriptions' });
+  fastify.register(doctorsRoutes, { prefix: '/doctors' });
 };
 
 export { appRoutes };
