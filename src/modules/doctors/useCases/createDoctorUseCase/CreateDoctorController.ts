@@ -16,17 +16,17 @@ class CreateDoctorController {
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const { registration_document, specialty, user_id } = request.body as IRquestBody;
 
-    //try {
-    const data = await this.createDoctorUseCase.execute({
-      registration_document,
-      specialty,
-      user_id
-    });
+    try {
+      const data = await this.createDoctorUseCase.execute({
+        registration_document,
+        specialty,
+        user_id
+      });
 
-    return reply.status(201).send(jsonFormatter(data));
-    // } catch (err) {
-    //  return reply.status(400).send({ error: "Error!" });
-    //}
+      return reply.status(201).send(jsonFormatter(data));
+    } catch (err) {
+      return reply.status(400).send({ error: "Error!" });
+    }
   }
 }
 
