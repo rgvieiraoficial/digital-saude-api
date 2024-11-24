@@ -6,7 +6,7 @@ import { prisma } from '../../../../lib/prisma';
 
 class DoctorsRepository implements IDoctorsRepository {
 
-  async create({ registration_document, specialty, User}: Prisma.DoctorCreateInput): Promise<Doctor | null> {
+  async create({ registration_document, specialty, User }: Prisma.DoctorCreateInput): Promise<Doctor | null> {
     const doctor = await prisma.doctor.create({
       data: {
         registration_document,

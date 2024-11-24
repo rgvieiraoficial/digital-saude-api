@@ -7,13 +7,7 @@ interface IPayload {
   sub: string;
 }
 
-interface IRequest extends FastifyRequest {
-  user: {
-    id: string;
-  }
-}
-
-export const authMiddleware = async (request: IRequest, reply: FastifyReply, next: HookHandlerDoneFunction) => {
+export const authMiddleware = async (request: FastifyRequest, reply: FastifyReply, next: HookHandlerDoneFunction) => {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -25,9 +19,14 @@ export const authMiddleware = async (request: IRequest, reply: FastifyReply, nex
   try {
     const { sub: user_id } = verify(token, auth.secret_token) as IPayload;
 
-    request.user = {
-      id: user_id
-    };
+    const body = request.body as {};
+
+    request.body = {
+      ...body,
+      user_id,
+    }
+
+    console.log(request.body);
 
     return next();
   } catch {
