@@ -6,12 +6,12 @@ import { prisma } from '../../../../lib/prisma';
 
 class PrescriptionsRepository implements IPrescriptionsRepository {
 
-  async create({ code, name_remedy, qnts, type, instructions, status, expires_at }: Prisma.PrescriptionCreateInput): Promise<Prescription | null> {
+  async create({ code, name_drug, quantity, type, instructions, status, expires_at }: Prisma.PrescriptionCreateInput): Promise<Prescription | null> {
     const prescription = await prisma.prescription.create({
       data: {
         code,
-        name_remedy,
-        qnts,
+        name_drug,
+        quantity,
         type,
         instructions,
         status,

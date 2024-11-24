@@ -23,6 +23,18 @@ class UsersRepository implements IUsersRepository {
     return data;
   }
 
+  async findById(id: string): Promise<User | null> {
+    const data = await prisma.user.findUnique({
+      where: {
+        id
+      }
+    });
+
+    prisma.$disconnect;
+
+    return data;
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     const data = await prisma.user.findUnique({
       where: {

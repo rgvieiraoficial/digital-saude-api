@@ -19,9 +19,14 @@ export const authMiddleware = async (request: FastifyRequest, reply: FastifyRepl
   try {
     const { sub: user_id } = verify(token, auth.secret_token) as IPayload;
 
+    const body = request.body as {};
+
     request.body = {
-      user_id: user_id
-    };
+      ...body,
+      user_id,
+    }
+
+    console.log(request.body);
 
     return next();
   } catch {

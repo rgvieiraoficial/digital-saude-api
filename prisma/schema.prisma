@@ -34,16 +34,22 @@ enum UserRole {
 }
 
 model Prescription {
-  id           String   @id @default(uuid())
-  code         String   @unique
-  name_remedy  String
-  qnts         Int
+  id           String           @id @default(uuid())
+  code         String           @unique
+  name_drug    String
+  quantity     Int
   type         String
   instructions String
-  status       Int
+  status       PrescriptionRole @default(PENDING)
   expires_at   DateTime
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  created_at   DateTime         @default(now())
+  updated_at   DateTime         @updatedAt
+}
+
+enum PrescriptionRole {
+  PENDING
+  EXPIRED
+  USED
 }
 
 model Doctor {
