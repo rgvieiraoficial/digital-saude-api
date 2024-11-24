@@ -4,7 +4,7 @@ import { CreateDoctorUseCase } from "./CreateDoctorUseCase";
 
 import { jsonFormatter } from '../../../../helpers/jsonFormatter';
 
-interface IRquestBody {
+interface IRequestBody {
   registration_document: string;
   specialty: string;
   user_id: string;
@@ -14,7 +14,7 @@ class CreateDoctorController {
   constructor(private createDoctorUseCase: CreateDoctorUseCase) { }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const { registration_document, specialty, user_id } = request.body as IRquestBody;
+    const { registration_document, specialty, user_id } = request.body as IRequestBody;
 
     try {
       const data = await this.createDoctorUseCase.execute({
