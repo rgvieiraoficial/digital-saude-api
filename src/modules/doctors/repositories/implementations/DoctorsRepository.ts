@@ -20,6 +20,18 @@ class DoctorsRepository implements IDoctorsRepository {
     return doctor;
   }
 
+  async findById(id: string): Promise<Doctor | null> {
+    const data = await prisma.doctor.findUnique({
+      where: {
+        id
+      }
+    });
+
+    prisma.$disconnect;
+
+    return data;
+  }
+
   async list(): Promise<Doctor[]> {
     const doctors = await prisma.doctor.findMany();
 
