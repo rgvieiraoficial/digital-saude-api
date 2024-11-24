@@ -15,16 +15,18 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  name       String
-  cpf        String   @unique
-  email      String   @unique
-  phone      BigInt   @unique
-  password   String
-  role       UserRole @default(CLIENT)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  Doctors     Doctor[]
+  id           String        @id @default(uuid())
+  name         String
+  cpf          String        @unique
+  email        String        @unique
+  phone        BigInt        @unique
+  password     String
+  role         UserRole      @default(CLIENT)
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+  Doctors      Doctor[]
+  Purchase     Purchase[]
+  Consultation Consultation?
 }
 
 enum UserRole {
@@ -34,24 +36,54 @@ enum UserRole {
 }
 
 model Prescription {
-  id           String   @id @default(uuid())
-  code         String   @unique
-  name_remedy  String
-  qnts         Int
-  type         String
-  instructions String
-  status       Int
-  expires_at   DateTime
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  id              String           @id @default(uuid())
+  code            String           @unique
+  name_remedy     String
+  qnts            Int
+  type            String
+  instructions    String
+  status          Int
+  expires_at      DateTime
+  created_at      DateTime         @default(now())
+  updated_at      DateTime         @updatedAt
+  Purchase        Purchase?
+  Consult_Recipes Consult_Recipes?
 }
 
 model Doctor {
-  id                    String   @id @default(uuid())
-  registration_document String   @unique
-  user_id               String   @unique
-  userId                User     @relation(fields: [user_id], references: [id])
+  id                    String        @id @default(uuid())
+  registration_document String        @unique
+  user_id               String        @unique
+  userId                User          @relation(fields: [user_id], references: [id])
   specialty             String
-  created_at            DateTime @default(now())
-  updated_at            DateTime @updatedAt
+  created_at            DateTime      @default(now())
+  updated_at            DateTime      @updatedAt
+  Consultation          Consultation?
+}
+
+model Purchase {
+  id                String       @id @default(uuid())
+  user_id           User         @relation(fields: [id_pharmaceutical], references: [id])
+  id_pharmaceutical String       @unique
+  prescriptionId    Prescription @relation(fields: [id_prescription], references: [id])
+  id_prescription   String       @unique
+  date              DateTime
+}
+
+model Consultation {
+  id              String           @id @default(uuid())
+  id_client       User             @relation(fields: [clienteId], references: [id])
+  clienteId       String           @unique
+  id_doctor       Doctor           @relation(fields: [userId], references: [id])
+  userId          String           @unique
+  status          Int
+  Consult_Recipes Consult_Recipes?
+}
+
+model Consult_Recipes {
+  id              String       @id @default(uuid())
+  id_consultation Consultation @relation(fields: [consultationId], references: [id])
+  consultationId  String       @unique
+  id_prescription Prescription @relation(fields: [prescriptionId], references: [id])
+  prescriptionId  String       @unique
 }
