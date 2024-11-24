@@ -42,7 +42,7 @@ model Prescription {
   quantity        Int
   type            String
   instructions    String
-  status          PrescriptionRole  @default(PENDING)
+  status          PrescriptionRole  @default(PENDENTE)
   Consult_Recipes Consult_Recipes[]
   Purchase        Purchase?
   expires_at      DateTime
@@ -51,9 +51,9 @@ model Prescription {
 }
 
 enum PrescriptionRole {
-  PENDING
-  EXPIRED
-  USED
+  PENDENTE 
+  EXPIRADO 
+  USADO    
 }
 
 model Doctor {

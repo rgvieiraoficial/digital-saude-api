@@ -24,6 +24,18 @@ class PrescriptionsRepository implements IPrescriptionsRepository {
     return prescription;
   }
 
+  async findById(id: string): Promise<Prescription | null> {
+    const data = await prisma.prescription.findUnique({
+      where: {
+        id
+      }
+    });
+
+    prisma.$disconnect;
+
+    return data;
+  }
+
   async list(): Promise<Prescription[]> {
     const prescriptions = await prisma.prescription.findMany();
 
