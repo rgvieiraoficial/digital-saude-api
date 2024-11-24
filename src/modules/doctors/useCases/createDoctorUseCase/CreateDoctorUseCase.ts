@@ -12,7 +12,7 @@ class CreateDoctorUseCase {
 
   async execute({ registration_document, specialty}: IRequest): Promise<Doctor> {
 
-    const data = await this.doctorRepository.create({ registration_document, specialty});
+    const data = await this.doctorRepository.create({ registration_document, specialty });
 
     return data;
   }

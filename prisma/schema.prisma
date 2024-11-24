@@ -24,6 +24,7 @@ model User {
   role       UserRole @default(CLIENT)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  Doctors     Doctor[]
 }
 
 enum UserRole {
@@ -48,6 +49,8 @@ model Prescription {
 model Doctor {
   id                    String   @id @default(uuid())
   registration_document String   @unique
+  user_id               String   @unique
+  userId                User     @relation(fields: [user_id], references: [id])
   specialty             String
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
