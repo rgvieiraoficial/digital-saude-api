@@ -4,7 +4,7 @@ import { CreatePurchaseUseCase } from "./CreatePurchaseUseCase";
 
 import { jsonFormatter } from '../../../../helpers/jsonFormatter';
 
-interface IRquestBody {
+interface IRequestBody {
   // id
   // id
   // data
@@ -14,10 +14,10 @@ class CreatePurchaseController {
   constructor(private createPurchaseUseCase: CreatePurchaseUseCase) { }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const {  } = request.body as IRquestBody;
+    const { } = request.body as IRequestBody;
 
     try {
-      const data = await this.createPurchaseUseCase.execute({ });
+      const data = await this.createPurchaseUseCase.execute({});
 
       return reply.status(201).send(jsonFormatter(data));
     } catch (err) {

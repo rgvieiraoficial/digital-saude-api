@@ -5,7 +5,7 @@ import { CreateConsultationUseCase } from "./CreateConsultationUseCase";
 
 import { jsonFormatter } from '../../../../helpers/jsonFormatter';
 
-interface IRquestBody {
+interface IRequestBody {
   Client: string,
   Doctor: string,
   status: num,
@@ -17,7 +17,7 @@ class CreateConsultationController {
   constructor(private createConsultationUseCase: CreateConsultationUseCase) { }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const { Client, Doctor, status, id_client, Consult_Recipes, } = request.body as IRquestBody;
+    const { Client, Doctor, status, id_client, Consult_Recipes, } = request.body as IRequestBody;
 
     try {
       const data = await this.createConsultationUseCase.execute({ Client, Doctor, status, id_client, Consult_Recipes, });

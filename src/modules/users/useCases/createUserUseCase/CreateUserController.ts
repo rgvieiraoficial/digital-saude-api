@@ -6,7 +6,7 @@ import { CreateUserUseCase } from "./CreateUserUseCase";
 
 import { jsonFormatter } from '../../../../helpers/jsonFormatter';
 
-interface IRquestBody {
+interface IRequestBody {
   name: string,
   cpf: string,
   email: string,
@@ -19,7 +19,7 @@ class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) { }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const { name, cpf, email, phone, password, role } = request.body as IRquestBody;
+    const { name, cpf, email, phone, password, role } = request.body as IRequestBody;
 
     try {
       const data = await this.createUserUseCase.execute({ name, cpf, email, phone, password, role });

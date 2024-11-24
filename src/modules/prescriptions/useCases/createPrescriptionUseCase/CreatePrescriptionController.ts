@@ -5,7 +5,7 @@ import { CreatePrescriptionUseCase } from "./CreatePrescriptionUseCase";
 
 import { jsonFormatter } from '../../../../helpers/jsonFormatter';
 
-interface IRquestBody {
+interface IRequestBody {
   code: string;
   name_drug: string;
   quantity: number;
@@ -19,7 +19,7 @@ class CreatePrescriptionController {
   constructor(private createPrescriptionUseCase: CreatePrescriptionUseCase) { }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const { code, name_drug, quantity, type, instructions, status, expires_at } = request.body as IRquestBody;
+    const { code, name_drug, quantity, type, instructions, status, expires_at } = request.body as IRequestBody;
 
     try {
       const data = await this.createPrescriptionUseCase.execute({ code, name_drug, quantity, type, instructions, status, expires_at: new Date(expires_at) });

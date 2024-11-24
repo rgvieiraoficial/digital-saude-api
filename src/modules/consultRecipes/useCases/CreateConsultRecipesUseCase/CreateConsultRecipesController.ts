@@ -4,7 +4,7 @@ import { CreateConsultRecipesUseCase } from "./CreateConsultRecipesUseCase";
 
 import { jsonFormatter } from '../../../../helpers/jsonFormatter';
 
-interface IRquestBody {
+interface IRequestBody {
   consultation_id: string,
   prescription_id: string,
 }
@@ -13,7 +13,7 @@ class CreateConsultRecipesController {
   constructor(private createConsultRecipesUseCase: CreateConsultRecipesUseCase) { }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const { } = request.body as IRquestBody;
+    const { } = request.body as IRequestBody;
 
     try {
       const data = await this.createConsultRecipesUseCase.execute({
@@ -28,4 +28,4 @@ class CreateConsultRecipesController {
   }
 }
 
-export { CreateConsultRecipesController};
+export { CreateConsultRecipesController };

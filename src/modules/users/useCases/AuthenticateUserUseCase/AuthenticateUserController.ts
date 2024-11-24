@@ -4,7 +4,7 @@ import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 import { jsonFormatter } from '../../../../helpers/jsonFormatter';
 
-interface IRquestBody {
+interface IRequestBody {
   email: string,
   password: string,
 }
@@ -13,7 +13,7 @@ class AuthenticateUserController {
   constructor(private authenticateUserUseCase: AuthenticateUserUseCase) { }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const { email, password, } = request.body as IRquestBody;
+    const { email, password, } = request.body as IRequestBody;
 
     try {
       const data = await this.authenticateUserUseCase.execute({ email, password });
