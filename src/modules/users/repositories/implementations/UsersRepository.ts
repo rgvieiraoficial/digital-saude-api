@@ -7,7 +7,7 @@ import { prisma } from '../../../../lib/prisma';
 class UsersRepository implements IUsersRepository {
 
   async create({ name, cpf, email, phone, password, role }: Prisma.UserCreateInput): Promise<User | null> {
-    const user = await prisma.user.create({
+    const data = await prisma.user.create({
       data: {
         name,
         cpf,
@@ -20,15 +20,27 @@ class UsersRepository implements IUsersRepository {
 
     prisma.$disconnect;
 
-    return user;
+    return data;
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const data = await prisma.user.findUnique({
+      where: {
+        email
+      }
+    });
+
+    prisma.$disconnect;
+
+    return data;
   }
 
   async list(): Promise<User[]> {
-    const users = await prisma.user.findMany();
+    const data = await prisma.user.findMany();
 
     prisma.$disconnect();
 
-    return users;
+    return data;
   }
 }
 
